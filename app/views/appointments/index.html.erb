@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header">
+  <h1>Lista de citas</h1>
+</div>
+<div class="panel panel-default">
+  <!--div class="panel-heading">Panel heading</div-->
+  <!--div class="panel-body"><p>...</p></div-->
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre del paciente</th>
+        <th>Motivo</th>
+        <th>Observaciones</th>
+        <th>Fecha</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+  
+    <tbody>
+      <% @appointments.each do |appointment| %>
+        <% if appointment.user_id==current_user.id || current_user.admin==true%>
+          <tr>
+            <td><%= appointment.nombre %></td>
+            <td><%= appointment.motivo %></td>
+            <td><%= appointment.observaciones %></td>
+            <td><%= appointment.fecha%></td>
+            <td><%= link_to 'Ver', appointment %></td>
+            <td><%= link_to 'Editar', edit_appointment_path(appointment) %></td>
+            <td><%= link_to 'Cancelar', appointment, method: :delete, data: { confirm: '¿Esta seguro que desea cancelar la cita?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table> 
+</div>
+
+<br>
+<%= button_to 'Solicitar cita', new_appointment_path, :class => "btn btn-primary", :method => :get %>

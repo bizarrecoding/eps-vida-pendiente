@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  motivo: MyString
+  observaciones: MyText
+  fecha: 2015-11-04 04:06:20
+  user_id: 1
+
+two:
+  nombre: MyString
+  motivo: MyString
+  observaciones: MyText
+  fecha: 2015-11-04 04:06:20
+  user_id: 1

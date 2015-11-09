@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header">
+  <h1>Lista de quejas</h1>
+</div>
+<% @complains.each do |complain| %>
+  <div class="panel panel-default">
+    <h2><%= complain.titulo %></h2>
+    <p><%= complain.contenido %></p>
+    <p><%= complain.autor %></p>
+    <% if signed_in? %>
+      <% if current_user.email==complain.autor || current_user.admin %>  
+        <%= link_to 'Editar', edit_complain_path(complain), class:"padding-left" %>
+        <%= link_to 'Cancelar', complain, method: :delete, data: { confirm: '¿Esta seguro?' } %> <!--complain(_path) -->
+      <% end %>
+    <% end %>
+  </div>    
+<% end %>
+
+<br>
+
+<%= link_to 'Nueva queja', new_complain_path, class: "btn btn-primary" %>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EPS-La vida pendiente</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to 'La vida pendiente EPS', appointments_path, :class => "navbar-brand" %>
+        </div>
+        <% if user_signed_in? %>
+          <div class="btn-group right" role="group">
+            <%= link_to current_user.fullname, edit_user_registration_path, :class => "btn btn-info navbar-btn right" %>
+            <%= link_to "Quejas y reclamos", complains_path, :class => "btn btn-info navbar-btn right" %>
+            <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => "btn btn-info navbar-btn right" %>
+          </div>
+        <% else %>
+          <div class="btn-group right" role="group">
+            <%= link_to "Registrarse", new_user_registration_path, :class => "btn btn-info navbar-btn right"%>
+            <%= link_to "Iniciar Session", new_user_session_path, :class => "btn btn-info navbar-btn right"%>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+    
+    <div class="panel panel-default contenedor">
+      <div class="panel-body">
+        <% if user_signed_in? %>
+          <% if current_user.admin == true %>
+            <h6>Iniciado como Admin</h6>
+          <% end %>
+        <% end %>
+        <%= yield %>
+      </div>
+    <br>
+    <a href="http://1drv.ms/1SDIU4Z">Manual</a>
+    </div>
+  </body>
+</html>
